@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health History - Fitness Club</title>
+    <link rel="stylesheet" href="../style/health-history.css">
+</head>
+<body>
+    <!-- Navigation Sidebar -->
+    <aside class="navigation-sidebar" role="navigation" aria-label="Main navigation">
+        <nav class="nav-content">
+            <h2>Navigation</h2>
+            <button class="nav-option" data-page="profile">Profile Management</button>
+            <button class="nav-option active" data-page="health">Health History</button>
+            <a href="./member-dashboard.html" class="back-btn">← Back to Dashboard</a>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="health-main">
+        <header class="page-header">
+            <h1>Health History</h1>
+            <p class="page-subtitle">Track your progress over time</p>
+        </header>
+
+        <div class="health-container">
+            <!-- Metric Selection -->
+            <section class="selection-card">
+                <h2>Select Metric to View</h2>
+                <form class="metric-selection-form">
+                    <div class="form-group">
+                        <label for="metricType">Metric Type</label>
+                        <select id="metricType" name="metricType">
+                            <option value="">Choose a metric type...</option>
+                            <option value="weight">Weight</option>
+                            <option value="body_fat">Body Fat Percentage</option>
+                            <option value="max_hr">Max Heart Rate</option>
+                        </select>
+                    </div>
+                </form>
+            </section>
+
+            <!-- History Table -->
+            <section class="table-card">
+                <h2>History Data</h2>
+                <div class="table-container">
+                    <table id="historyTable" aria-label="Health metric history">
+                        <thead>
+                            <tr>
+                                <th scope="col">Date</th>
+                                <th scope="col">Value</th>
+                                <th scope="col">Progress</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- History data will be populated here -->
+                            <tr class="no-data">
+                                <td colspan="3">Select a metric type to view history</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Summary Statistics -->
+                <div class="summary-stats" id="summaryStats" style="display: none;">
+                    <div class="stat-item">
+                        <span class="stat-label">Records:</span>
+                        <span class="stat-value" id="recordCount">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Time Period:</span>
+                        <span class="stat-value" id="timePeriod">--</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Overall Change:</span>
+                        <span class="stat-value" id="overallChange">--</span>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="../logic/healthHistoryHandlers.js" type="module"></script>
+</body>
+</html>

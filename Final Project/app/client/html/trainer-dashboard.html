@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trainer Dashboard - Fitness Club</title>
+    <link rel="stylesheet" href="../style/trainer-dashboard.css">
+</head>
+<body>
+    <header role="banner">
+        <div class="header-content">
+            <div class="search-container">
+                <input type="text" id="memberSearch" placeholder="Search members by name..." 
+                       aria-label="Search members by name" class="search-input">
+                <div id="searchDropdown" class="search-dropdown hidden" role="listbox"></div>
+            </div>
+            <h1 class="page-title">Trainer Dashboard</h1>
+            <button class="setting-button" aria-label="Open settings menu" aria-expanded="false">
+                <img src="../image/setting.png" alt="Settings" class="setting-icon">
+            </button>
+        </div>
+    </header>
+    
+    <!-- Settings Panel -->
+    <aside class="settings-panel" role="dialog" aria-label="Settings menu" aria-hidden="true">
+        <button class="close-settings-btn" aria-label="Close settings menu">&times;</button>
+        <h2>Settings</h2>
+        <nav class="settings-content" role="navigation">
+            <button class="settings-option" data-action="availability">Set Availability</button>
+            <button class="settings-option" data-action="schedule">View Schedule</button>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content" role="main">
+
+        <!-- Member Information Section -->
+        <section id="memberInfo" class="info-section hidden">
+            <div class="section-header">
+                <h2>Member Information</h2>
+                <button class="close-member-btn" aria-label="Close member information">&times;</button>
+            </div>
+            <div class="member-details" id="memberDetails">
+                <!-- Personal Information -->
+                <div class="member-card">
+                    <h3>Personal Information</h3>
+                    <div class="member-stats">
+                        <div class="stat-item">
+                            <div class="stat-label">Name</div>
+                            <div class="stat-value" id="memberName">--</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Email</div>
+                            <div class="stat-value" id="memberEmail">--</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Phone</div>
+                            <div class="stat-value" id="memberPhone">--</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Gender</div>
+                            <div class="stat-value" id="memberGender">--</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Health Metrics -->
+                <div class="member-card">
+                    <h3>Current Health Metrics</h3>
+                    <div class="member-stats" id="healthMetrics">
+                        <div class="no-data">No health metrics recorded</div>
+                    </div>
+                </div>
+
+                <!-- Fitness Goals -->
+                <div class="member-card">
+                    <h3>Fitness Goals</h3>
+                    <div class="member-stats" id="fitnessGoals">
+                        <div class="no-data">No active goals set</div>
+                    </div>
+                </div>
+
+                <!-- Activity Summary -->
+                <div class="member-card">
+                    <h3>Activity Summary</h3>
+                    <div class="member-stats">
+                        <div class="stat-item">
+                            <div class="stat-label">Past Classes</div>
+                            <div class="stat-value" id="pastClassesCount">0</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Upcoming Sessions</div>
+                            <div class="stat-value" id="upcomingSessionsCount">0</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Availability Section -->
+        <section id="availabilitySection" class="info-section">
+            <div class="section-header">
+                <h2>Manage Availability</h2>
+            </div>
+            
+            <div class="availability-container">
+                <!-- Set Availability Form -->
+                <div class="set-availability-form">
+                    <form id="availabilityForm" aria-label="Set availability form">
+                        <div id="formError" class="error-message" style="display: none;"></div>
+                        <div id="formSuccess" class="success-message" style="display: none;"></div>
+                        <div class="form-group">
+                            <label for="availabilityDays">Select Days</label>
+                            <select id="availabilityDays" name="availabilityDays" multiple size="4" aria-describedby="daysHelp">
+                                <option value="monday">Monday</option>
+                                <option value="tuesday">Tuesday</option>            
+                                <option value="wednesday">Wednesday</option>
+                                <option value="thursday">Thursday</option>
+                                <option value="friday">Friday</option>
+                                <option value="saturday">Saturday</option>
+                                <option value="sunday">Sunday</option>
+                            </select>
+                            <small id="daysHelp">Hold Ctrl/Cmd to select multiple days</small>
+                        </div>
+
+                        <div class="time-inputs">
+                            <div class="form-group">
+                                <label for="startTime">Start Time</label>
+                                <input type="time" id="startTime" name="startTime" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="endTime">End Time</label>
+                                <input type="time" id="endTime" name="endTime" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="frequency">Frequency</label>
+                            <select id="frequency" name="frequency"required>
+                                <option value="">Select frequency</option>
+                                <option value="weekly">Weekly (Recurring)</option>
+                                <option value="one_time">One-time</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn-primary">Add Availability</button>
+                    </form>
+                </div>
+
+                <!-- Current Availability Display -->
+                <div class="availability-display">
+                    <h3>Current Availability</h3>
+                    <div class="table-container">
+                        <table class="availability-table" aria-label="Current availability schedule">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Day</th>
+                                    <th scope="col">Start Time</th>
+                                    <th scope="col">End Time</th>
+                                    <th scope="col">Frequency</th>
+                                    <th scope="col">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="availabilityBody">
+                                <tr>
+                                    <td colspan="5" class="no-data">No availability set</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Actions -->
+        <section class="quick-actions">
+            <h2>Quick Actions</h2>
+            <div class="action-buttons">
+                <button class="action-btn" data-action="availability">Set Availability</button>
+                <button class="action-btn" data-action="schedule">Schedule View</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Navigation -->
+    <a class="logout-btn" href="login.html" aria-label="Logout and return to login">
+        <img src="../image/home.webp" alt="Logout" class="logout-icon">
+    </a>
+
+    <!-- Hidden Templates -->
+
+     <!-- Member lookup Templates -->
+    <template id="memberItemTemplate">
+        <div class="member-search-item" role="option">
+            <span class="member-name"></span>
+        </div>
+    </template>
+
+    <template id="noResultsTemplate">
+        <div class="no-results">No members found</div>
+    </template>
+
+    <!-- Availability Templates -->
+    <template id="availabilityRowTemplate">
+        <tr class="availability-row">
+            <td class="availability-day"></td>
+            <td class="availability-start"></td>
+            <td class="availability-end"></td>
+            <td class="availability-frequency"></td>
+            <td>
+                <button class="btn-danger remove-availability" aria-label="Remove availability">Remove</button>
+            </td>
+        </tr>
+    </template>
+
+    <template id="noAvailabilityTemplate">
+        <tr>
+            <td colspan="5" class="no-data">No availability set</td>
+        </tr>
+    </template>
+    <script src="../logic/trainerHandlers.js"></script>
+    <script src="../logic/trainerListeners.js"></script>
+</body>
+</html>

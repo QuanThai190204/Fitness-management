@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equipment Maintenance - Fitness Club</title>
+    <link rel="stylesheet" href="../style/equipment-maintenance.css">
+</head>
+<body>
+    <header role="banner">
+        <div class="header-content">
+            <h1 class="page-title">Equipment Maintenance</h1>
+            <a href="admin-dashboard.html" class="back-btn">← Back to Admin Dashboard</a>
+        </div>
+    </header>
+
+    <main class="main-content" role="main">
+        <!-- Tab Navigation -->
+        <nav class="tab-navigation" role="tablist">
+            <button class="tab-btn active" data-tab="equipment">Equipment</button>
+            <button class="tab-btn" data-tab="maintenance">Maintenance Logs</button>
+            <button class="tab-btn" data-tab="repairs">Repair Tasks</button>
+        </nav>
+
+        <!-- Equipment Tab -->
+        <section id="equipmentTab" class="tab-content active">
+            <div class="section-header">
+                <h2>Equipment Status</h2>
+            </div>
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Location</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="equipmentBody">
+                        <!-- Equipment data will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Maintenance Logs Tab -->
+        <section id="maintenanceTab" class="tab-content">
+            <div class="section-header">
+                <h2>Maintenance Logs</h2>
+            </div>
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Equipment</th>
+                            <th>Issue Description</th>
+                            <th>Reported Date</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="maintenanceBody">
+                        <!-- Maintenance logs will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Repair Tasks Tab -->
+        <section id="repairsTab" class="tab-content">
+            <div class="section-header">
+                <h2>Repair Tasks</h2>
+            </div>
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Technician</th>
+                            <th>Equipment</th>
+                            <th>Issue</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="repairsBody">
+                        <!-- Repair tasks will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <!-- Log Maintenance Modal -->
+    <div id="logMaintenanceModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Log Maintenance Issue</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <form id="logMaintenanceForm">
+                <input type="hidden" id="logEquipmentId">
+                <div class="form-group">
+                    <label for="issueDescription">Issue Description</label>
+                    <textarea id="issueDescription" required></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">Log Issue</button>
+                    <button type="button" class="btn-secondary close-modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Assign Repair Modal -->
+    <div id="assignRepairModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Assign Repair Task</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <form id="assignRepairForm">
+                <input type="hidden" id="repairLogId">
+                <div class="form-group">
+                    <label for="technician">Technician Name</label>
+                    <input type="text" id="technician" required>
+                </div>
+                <div class="form-group">
+                    <label for="repairStartTime">Start Time</label>
+                    <input type="datetime-local" id="repairStartTime" required>
+                </div>
+                <div class="form-group">
+                    <label for="repairEndTime">Estimated End Time</label>
+                    <input type="datetime-local" id="repairEndTime" required>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">Assign Task</button>
+                    <button type="button" class="btn-secondary close-modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../logic/equipmentHandlers.js"></script>
+    <script src="../logic/equipmentListeners.js"></script>
+</body>
+</html>

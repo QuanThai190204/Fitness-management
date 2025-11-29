@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Fitness Club</title>
+    <link rel="stylesheet" href="../style/admin-dashboard.css">
+</head>
+<body>
+    <header role="banner">
+        <div class="header-content">
+            <h1 class="page-title">Administrator Dashboard</h1>
+            <div class="admin-info">
+                <span>System Administrator</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content" role="main">
+        <!-- Welcome Section -->
+        <section class="welcome-section">
+            <h2>Fitness Club Management System</h2>
+            <p class="subtitle">Manage equipment, billing, classes, and room bookings</p>
+        </section>
+
+        <!-- Quick Actions -->
+        <section class="quick-actions">
+            <h2>Management Functions</h2>
+            <div class="action-grid">
+                <button class="action-card" data-action="equipment">
+                    <div class="action-icon">🔧</div>
+                    <h3>Equipment Maintenance</h3>
+                    <p>Track and manage equipment repairs and status</p>
+                </button>
+                
+                <button class="action-card" data-action="billing">
+                    <div class="action-icon">💰</div>
+                    <h3>Billing & Payments</h3>
+                    <p>Generate bills and process payments</p>
+                </button>
+                
+                <button class="action-card" data-action="classes" disabled>
+                    <div class="action-icon">📚</div>
+                    <h3>Class Management</h3>
+                    <p>Schedule classes and assign trainers</p>
+                    <small>Coming Soon</small>
+                </button>
+                
+                <button class="action-card" data-action="rooms" disabled>
+                    <div class="action-icon">🏠</div>
+                    <h3>Room Booking</h3>
+                    <p>Manage room assignments and scheduling</p>
+                    <small>Coming Soon</small>
+                </button>
+            </div>
+        </section>
+
+        <!-- System Overview -->
+        <section class="system-overview">
+            <h2>System Overview</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Active Members</h3>
+                    <div class="stat-value" id="activeMembers">--</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Equipment Issues</h3>
+                    <div class="stat-value" id="equipmentIssues">--</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Pending Bills</h3>
+                    <div class="stat-value" id="pendingBills">--</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Active Trainers</h3>
+                    <div class="stat-value" id="activeTrainers">--</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Navigation -->
+    <a class="logout-btn" href="login.html" aria-label="Logout and return to login">
+        <img src="../image/home.webp" alt="Logout" class="logout-icon">
+    </a>
+
+    <script src="../logic/admin-dashboard.js" type="module"></script>
+</body>
+</html>

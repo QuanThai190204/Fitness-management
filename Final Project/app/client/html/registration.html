@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fitness Club - Register</title>
+    <link rel="stylesheet" href="../style/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Create Account</h2>
+        <form id="registerForm">
+            <label for = "firstName"> First name </label>
+            <input type="text" name="firstName" placeholder="Alan" required>
+            <label for = "lastName"> Last name </label>
+            <input type="text" name="lastName" placeholder="Gates" required>
+            <label for = "email"> Email </label>    
+            <input type="email" name="email" placeholder="Alan.Gates@gmail.com" required>
+            <label for = "password"> Password </label>
+            <input type="password" name="password" placeholder="********" required>
+            <label for = "dateOfBirth"> Date of Birth </label>
+            <input type="date" name="dateOfBirth">
+            <label for = "gender"> Gender </label>
+            <select name="gender">
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select>
+            <label for = "phone"> Phone </label>
+            <input type="tel" name="phone" placeholder="61325489765">
+            <label for = "role"> Role </label>
+            <select name="role" required>
+                <option value="">Select Role</option>
+                <option value="member">Member</option>
+                <option value="trainer">Trainer</option>
+                <option value="admin">Admin</option>
+            </select>
+            <button type="submit">Register</button>
+        </form>
+        <p>Already have an account? <a href="login.html">Login here</a></p>
+        <div id="message"></div>
+    </div>
+   
+    <script src="../logic/registrationForm.js"></script>
+</body>
+</html>

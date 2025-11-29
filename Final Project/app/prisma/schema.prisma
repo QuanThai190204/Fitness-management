@@ -1,0 +1,117 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Users {
+  user_id                   Int                   @id @default(autoincrement())
+  email                     String                @unique
+  password_hash             String
+  first_name                String
+  last_name                 String
+  date_of_birth             DateTime?             
+  gender                    String?
+  phone                     String?
+  role                      String
+  past_classes_count        Int                   @default(0)
+  upcoming_sessions_count   Int                   @default(0)
+  created_at                DateTime              @default(now())
+  last_metric_update        DateTime              @default(now())
+
+  bills_received            Bill[]
+  fitness_goals             FitnessGoal[]
+  health_metrics            HealthMetric[]
+  reported_maintenance_logs MaintenanceLog[]      @relation("MaintenanceLogReporter")
+  trainer_availabilities    TrainerAvailability[]
+}
+
+model FitnessGoal {
+  goal_id      Int       @id @default(autoincrement())
+  user_id      Int
+  goal_type    String
+  target_value Float
+  start_date   DateTime
+  target_date  DateTime?
+  is_active    Boolean   @default(true)
+  created_at   DateTime  @default(now())
+  users         Users      @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
+}
+
+model HealthMetric {
+  metric_id   Int      @id @default(autoincrement())
+  user_id     Int
+  metric_type String  // 'weight', 'body_fat', 'max_hr', etc.
+  current_value       Float
+  logged_at   DateTime @default(now())
+  users        Users     @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
+}
+
+model TrainerAvailability {
+  availability_id Int      @id @default(autoincrement())
+  trainer_id      Int
+  day_of_week     String   // 'monday', 'tuesday', etc.
+  start_time      String
+  end_time        String
+  frequency       String   @default("weekly") // 'weekly' or 'one_time'
+  created_at      DateTime @default(now())
+  
+  trainer         Users     @relation(fields: [trainer_id], references: [user_id], onDelete: Cascade)
+}
+
+model Equipment {
+  equipment_id     Int              @id @default(autoincrement())
+  name             String
+  location         String?
+  status           String           @default("Operational")
+  created_at       DateTime         @default(now())
+  maintenance_logs MaintenanceLog[]
+}
+
+model MaintenanceLog {
+  log_id            Int       @id @default(autoincrement())
+  equipment_id      Int
+  reported_by       Int
+  reported_date     DateTime  @default(now())
+  issue_description String
+  status            String    @default("Reported")
+  equipment         Equipment @relation(fields: [equipment_id], references: [equipment_id], onDelete: Cascade)
+  reporter          Users      @relation("MaintenanceLogReporter", fields: [reported_by], references: [user_id], onDelete: Cascade)
+  repair_task       RepairTask?  
+}
+
+model RepairTask {
+  task_id      Int      @id @default(autoincrement())
+  log_id       Int      @unique       // ← THIS IS REQUIRED FOR 1:1
+  assigned_to  String
+  start_time   DateTime?
+  end_time     DateTime?
+  status       String   @default("pending") // pending, working, completed
+
+  maintenance_log MaintenanceLog @relation(fields: [log_id], references: [log_id], onDelete: Cascade)
+}
+
+model Bill {
+  bill_id     Int       @id @default(autoincrement())
+  member_id   Int
+  amount_due  Float
+  issue_date  DateTime  @default(now())
+  due_date    DateTime
+  description String    @default("Monthly Membership Fee")
+  status      String    @default("Pending")
+  created_at  DateTime  @default(now())
+  member      Users      @relation(fields: [member_id], references: [user_id], onDelete: Cascade)
+  payments    Payment[]
+}
+
+model Payment {
+  payment_id     Int      @id @default(autoincrement())
+  bill_id        Int
+  amount_paid    Float
+  payment_date   DateTime @default(now())
+  payment_method String?
+  bill           Bill     @relation(fields: [bill_id], references: [bill_id], onDelete: Cascade)
+}

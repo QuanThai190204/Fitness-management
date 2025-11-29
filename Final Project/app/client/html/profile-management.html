@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Management - Fitness Club</title>
+    <link rel="stylesheet" href="../style/profile-management.css">
+</head>
+<body>
+    <!-- Navigation Sidebar -->
+    <aside class="navigation-sidebar" role="navigation" aria-label="Main navigation">
+        <nav class="nav-content">
+            <h2>Navigation</h2>
+            <button class="nav-option active" data-page="profile">Profile Management</button>
+            <button class="nav-option" data-page="health">Health History</button>
+            <a href="./member-dashboard.html" class="back-btn">← Back to Dashboard</a>
+        </nav>
+    </aside>    
+
+    <!-- Main Content -->
+    <main class="profile-main">
+        <header class="page-header">
+            <h1>Profile Management</h1>
+            <p class="page-subtitle">Manage your personal information, health metrics, and fitness goals</p>
+        </header>
+
+        <div class="profile-container">
+            <!-- User Profile Section -->
+            <section class="info-card" aria-labelledby="user-profile-title">
+                <div class="card-header">
+                    <h2 id="user-profile-title">Personal Information</h2>
+                    <button class="edit-btn" data-form="user-info" aria-label="Edit personal information">
+                        <span class="btn-text">Edit</span>
+                        <span class="btn-icon">✏️</span>
+                    </button>
+                </div>
+                <form id="user-info" class="profile-form" data-disabled="true">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <input type="text" id="firstName" name="firstName" placeholder="Alan" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" id="lastName" name="lastName" placeholder="Gates" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>    
+                            <input type="email" id="email" name="email" placeholder="Alan.Gates@gmail.com" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" name="password" placeholder="********" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="dateOfBirth">Date of Birth</label>
+                            <input type="date" id="dateOfBirth" name="dateOfBirth" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="gender">Gender</label>
+                            <select id="gender" name="gender" disabled>
+                                <option value="">Select Gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input type="tel" id="phone" name="phone" placeholder="61325489765" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="role">Role</label>
+                            <input type="text" id="role" name="role" placeholder="Member" readonly disabled>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="apply-btn" disabled>Apply Changes</button>
+                        <button type="button" class="cancel-btn" disabled>Cancel</button>
+                    </div>
+                </form>   
+            </section>
+
+            <!-- Health Metrics Section -->
+            <section class="info-card" aria-labelledby="health-metrics-title">
+                <div class="card-header">
+                    <h2 id="health-metrics-title">Health Metrics</h2>
+                    <button class="edit-btn" data-form="health-info" aria-label="Edit health metrics">
+                        <span class="btn-text">Edit</span>
+                        <span class="btn-icon">✏️</span>
+                    </button>
+                </div>
+                <form id="health-info" class="profile-form" data-disabled="true">
+                    <div class="form-group">
+                        <label for="metricType">Metric Type</label>
+                        <select id="metricType" name="metricType">
+                            <option value="">Select Metric Type</option>
+                            <option value="weight">Weight</option>
+                            <option value="body_fat">Body Fat Percentage</option>
+                            <option value="max_hr">Max Heart Rate</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="metricValue">Metric Value</label>
+                        <input type="text" id="metricValue" name="metricValue" placeholder="" disabled>
+                        <span class="value-unit" id="metricUnit"></span>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="apply-btn" disabled>Add Metric</button>
+                        <button type="button" class="cancel-btn" disabled>Cancel</button>
+                    </div>
+                </form>   
+            </section>
+
+            <!-- Fitness Goals Section -->
+            <section class="info-card" aria-labelledby="fitness-goals-title">
+                <div class="card-header">
+                    <h2 id="fitness-goals-title">Fitness Goals</h2>
+                    <button class="edit-btn" data-form="goal-info" aria-label="Edit fitness goals">
+                        <span class="btn-text">Edit</span>
+                        <span class="btn-icon">✏️</span>
+                    </button>
+                </div>
+                <form id="goal-info" class="profile-form" data-disabled="true">
+                    <div class="form-group">
+                        <label for="goalType">Goal Type</label>
+                        <select id="goalType" name="goalType" disabled>
+                            <option value="">Select Goal Type</option>
+                            <option value="target_weight">Target Weight</option>
+                            <option value="target_body_fat">Target Body Fat %</option>
+                            <option value="target_max_hr">Target Max Heart Rate</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="targetValue">Target Value</label>
+                        <input type="text" id="targetValue" name="targetValue" placeholder="" disabled>
+                        <span class="value-unit" id="goalUnit"></span>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="startDate">Start Date</label>
+                            <input type="date" id="startDate" name="startDate" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="targetDate">Target Date</label>
+                            <input type="date" id="targetDate" name="targetDate" disabled>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="apply-btn" disabled>Set Goal</button>
+                        <button type="button" class="cancel-btn" disabled>Cancel</button>
+                    </div>
+                </form>   
+            </section>
+        </div>
+    </main>
+
+    <!-- JavaScript files -->
+    <script src="../logic/profileHandlers.js" type="module"></script>
+</body>
+</html>

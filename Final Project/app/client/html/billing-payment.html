@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Billing & Payments - Fitness Club</title>
+    <link rel="stylesheet" href="../style/billing-payment.css">
+</head>
+<body>
+    <header role="banner">
+        <div class="header-content">
+            <h1 class="page-title">Billing & Payments</h1>
+            <a href="admin-dashboard.html" class="back-btn">← Back to Admin Dashboard</a>
+        </div>
+    </header>
+
+    <main class="main-content" role="main">
+        <!-- Tab Navigation -->
+        <nav class="tab-navigation" role="tablist">
+            <button class="tab-btn active" data-tab="bills">Bills</button>
+            <button class="tab-btn" data-tab="payments">Payments</button>
+            <button class="tab-btn" data-tab="reports">Reports</button>
+        </nav>
+
+        <!-- Bills Tab -->
+        <section id="billsTab" class="tab-content active">
+            <div class="section-header">
+                <h2>Bills Management</h2>
+                <button class="btn-primary" id="generateBillBtn">Generate New Bill</button>
+            </div>
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Bill ID</th>
+                            <th>Member</th>
+                            <th>Amount Due</th>
+                            <th>Paid</th>
+                            <th>Remaining</th>
+                            <th>Issue Date</th>
+                            <th>Due Date</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="billsBody">
+                        <!-- Bills data will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Payments Tab -->
+        <section id="paymentsTab" class="tab-content">
+            <div class="section-header">
+                <h2>Payment History</h2>
+            </div>
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Payment ID</th>
+                            <th>Bill ID</th>
+                            <th>Member</th>
+                            <th>Amount Paid</th>
+                            <th>Payment Date</th>
+                            <th>Payment Method</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="paymentsBody">
+                        <!-- Payments data will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Reports Tab -->
+        <section id="reportsTab" class="tab-content">
+            <div class="section-header">
+                <h2>Financial Reports</h2>
+            </div>
+            <div class="reports-grid">
+                <div class="report-card">
+                    <h3>Monthly Revenue</h3>
+                    <div class="report-value" id="monthlyRevenue">--</div>
+                </div>
+                <div class="report-card">
+                    <h3>Pending Bills</h3>
+                    <div class="report-value" id="totalPending">--</div>
+                </div>
+                <div class="report-card">
+                    <h3>Total Members</h3>
+                    <div class="report-value" id="totalMembers">--</div>
+                </div>
+                <div class="report-card">
+                    <h3>Collection Rate</h3>
+                    <div class="report-value" id="collectionRate">--</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Generate Bill Modal -->
+    <div id="generateBillModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Generate New Bill</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <form id="generateBillForm">
+                <div class="form-group">
+                    <label for="billMember">Select Member</label>
+                    <select id="billMember" required>
+                        <option value="">Select a member...</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="billDescription">Description</label>
+                    <input type="text" id="billDescription" value="Monthly Membership Fee" required>
+                </div>
+                <div class="form-group">
+                    <label for="billAmount">Amount</label>
+                    <input type="number" id="billAmount" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="billDueDate">Due Date</label>
+                    <input type="date" id="billDueDate" required>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">Generate Bill</button>
+                    <button type="button" class="btn-secondary close-modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Record Payment Modal -->
+    <div id="recordPaymentModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Record Payment</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <form id="recordPaymentForm">
+                <input type="hidden" id="paymentBillId">
+                <div class="form-group">
+                    <label for="paymentAmount">Amount Paid</label>
+                    <input type="number" id="paymentAmount" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="paymentMethod">Payment Method</label>
+                    <select id="paymentMethod" required>
+                        <option value="">Select method...</option>
+                        <option value="credit_card">Credit Card</option>
+                        <option value="debit_card">Debit Card</option>
+                        <option value="cash">Cash</option>
+                        <option value="bank_transfer">Bank Transfer</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="paymentDate">Payment Date</label>
+                    <input type="date" id="paymentDate" required>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">Record Payment</button>
+                    <button type="button" class="btn-secondary close-modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../logic/billingHandlers.js"></script>
+    <script src="../logic/billingListeners.js"></script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Member Dashboard - Fitness Club</title>
+    <link rel="stylesheet" href="../style/member-dashboard.css">
+</head>
+<body>
+    <header role="banner">
+        <h1>Fitness Club Member Dashboard</h1>
+        <button class="setting-button" aria-label="Open settings menu" aria-expanded="false">
+            <img src="../image/setting.png" alt="Settings" class="setting-icon">
+        </button>
+    </header>
+    
+    <!-- Settings Panel -->
+    <aside class="settings-panel" role="dialog" aria-label="Settings menu" aria-hidden="true">
+        <button class="close-settings-btn" aria-label="Close settings menu">&times;</button>
+        <h2>Settings</h2>
+        <nav class="settings-content" role="navigation">
+            <button class="settings-option" data-page="profile">Profile Management</button>
+            <button class="settings-option" data-page="health">Health History</button>
+        </nav>
+    </aside>    
+    
+    <!-- Main Content -->
+    <main class="dashboard-container" role="main">
+        <section class="welcome-section">
+            <h2>Welcome, <span id="userName">Member</span>!</h2>
+            <p class="last-login">Last login: <span id="lastLogin">Loading...</span></p>
+        </section>
+
+        <section class="stats-grid">
+            <!-- Current Metrics -->
+            <div class="stat-card">
+                <h3>Current Weight</h3>
+                <p class="stat-value" id="currentWeight">-- kg</p>
+                <p class="stat-change" id="weightChange">-- vs last</p>
+            </div>
+            <div class="stat-card">
+                <h3>Body Fat %</h3>
+                <p class="stat-value" id="bodyFat">--%</p>
+                <p class="stat-change" id="bodyFatChange">-- vs last</p>
+            </div>
+            <div class="stat-card">
+                <h3>Max Heart Rate</h3>
+                <p class="stat-value" id="maxHR">-- bpm</p>
+                <p class="stat-change" id="hrChange">-- vs last</p>
+            </div>
+            
+            <!-- Progress & Activity -->
+            <div class="stat-card">
+                <h3>Past Classes</h3>
+                <p class="stat-value" id="pastClasses">0</p>
+                <p class="stat-subtext">This month</p>
+            </div>
+            <div class="stat-card progress-card">
+                <h3>Progress to Goal</h3>
+                <p class="stat-value" id="progressToGoal">-- kg</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <p class="stat-goal" id="goalText">Target: -- kg</p>
+            </div>
+            
+            <div class="stat-card">
+                <h3>Upcoming Sessions</h3>
+                <p class="stat-value" id="upcomingSessions">0</p>
+                <p class="stat-subtext">Next 7 days</p>
+            </div>
+        </section>
+
+        <section class="quick-actions">
+            <h3>Quick Actions</h3>
+            <div class="action-buttons">
+                <button class="action-btn" data-action="view-goals">Group Class Registration</button>
+                <button class="action-btn" data-action="schedule-session">PT Session Scheduling</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Navigation -->
+    <a class="logout-btn" href="login.html" aria-label="Logout">
+        <img src="../image/home.webp" alt="Logout" class="logout-icon">
+    </a>
+
+    <!-- JavaScript files -->
+    <script src="../logic/member-dashboard.js" type="module"></script>
+</body>
+</html>
